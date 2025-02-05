@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Add Task {% endblock %} 
+{%  block content %}
+    <div>
+        <h1 style="text-align: center; color: white; background-color: #229ED9; ">Telegram Automation Software</h1> 
+        <div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh;">
+                <form action="" method="POST" enctype="multipart/form-data" style="position: absolute; top: 100px; width: 80%;">
+                    {% csrf_token %}
+
+                        <label style="color: #229ED9;" for="">Message</label>
+                    <textarea cols="70" style="width: 100%; height: 100px; " name="message" id="" placeholder="Write your message here"></textarea>
+                    <br><br>
+                    <label style="color: #229ED9;" for="">Choose An Image(Optional)</label>
+                    <input type="file" style="width: 100%;" name="img" id="">
+                    <br><br>
+                    <label style="color: #229ED9;" for="">
+                        <input type="checkbox" name="repeat" id="">
+                        Enable Repeat
+                    </label>
+                    <br><br>
+
+                    <label style="color: #229ED9;" for="">Choose A Time(e.g <span style="color: purple;">2023-01-24 13:07:10</span> format)</label>
+                    <input type="text" style="width: 100%;" name="time" id="" placeholder="Insert time to execute">
+                    <br><br>
+
+                    <label style="color: #229ED9;" for="">Choose A Timeframe</label>
+                    <br>
+                    <select name="timeframe" id="" style="width: 200px;">
+                        <option value="daily">Daily</option>
+                        <option value="weekly" selected>Weekly</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="yearly">Yearly</option>
+                    </select>
+                    <br><br>
+
+                    <select name="robot" id="robot" style="width: 100%;">
+                        <option value="">-- Select a Robot --</option>
+                        {% for r in robots %}
+                            <option value="{{ r.id }}">{{ r.organization_name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <br><br>
+                    <button type="submit" style="background-color:
+                        #229ED9; color: white;
+                        padding: 7px;
+                        border-radius: 20px;
+                        width: 200px;
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 30%;
+                        border: none;
+                        margin: 0 auto; display: block;">
+                        Submit
+                </button>
+                </form>
+        </div>
+    </div>
+{% endblock %}

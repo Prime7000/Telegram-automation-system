@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %} Bot dashboard {% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; color: white; background-color: #229ED9; ">Bot Dashboard</h1>
+
+<style>
+    .parent{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-wrap: wrap;
+        align-items: start;
+        gap: 1rem;
+
+    }
+    .add{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #229ED9;
+        color: white;
+        border-radius: 50px;
+    }
+
+    .add:hover{
+        background-color: #1a749d;
+    }
+
+    .card{
+        width: 200px;
+        height: 200px;
+        background-color: #229ED9;
+        margin-top: 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card p{
+        color: white;
+        font-size: 20px;
+        line-height: 1.5rem;
+        margin: 0px;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
+<a href="{% url 'core:add_bot' %}">
+    <div class="add">
+        <i class="bi bi-plus" style="font-size: 30px;"></i>
+    </div>
+</a>
+
+<div class="parent">
+    {% for bot in bots %}
+    <div class="card" style="position: relative;">
+        <!-- Delete button -->
+        <a href="{% url 'core:delete_bot' bot.id %}" style="text-decoration: none;">
+            <span style="padding: 5px; position: absolute; top: 0; left: 0;">
+                <i style="background-color: red; padding: 2px; border-radius: 50px;" class="bi bi-trash"></i>
+            </span>
+        </a>
+        
+        <!-- Edit bot link -->
+        <a href="{% url 'core:edit_bot' bot.id %}" style="text-decoration: none; color: inherit;">
+            <p><b>{{bot.robot_name}}</b></p>
+            {% if bot.organization_name %}
+                <p> {{bot.organization_name}}</p>
+            {% else %}
+                <p>No Organization </p>
+            {% endif %}
+        </a>
+    </div>
+{% endfor %}
+</div>
+{% endblock %}

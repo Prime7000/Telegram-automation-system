@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Bot {% endblock %}
+
+{% block content %}
+
+<h1 style="text-align: center; color: white; background-color: #229ED9; ">Edit Bot</h1> 
+
+<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100vh;">
+    <form action="" method="POST" enctype="multipart/form-data" style="position: absolute; top: 100px; width: 80%;">
+        {% csrf_token %}
+
+        <label style="color: #229ED9;" for="">Name Of Bot</label>
+        <input value="{{bot.robot_name}}" type="text" style="width: 100%;" name="name" id="" placeholder="Insert the name of the bot">
+        <br><br>
+
+        <label style="color: #229ED9;" for="">Organization Name</label>
+        <input value="{{bot.organization_name}}" type="text" style="width: 100%;" name="organization" id="" placeholder="Insert the organization name">
+        <br><br>
+
+        <label style="color: #229ED9;" for="">Bot Key</label>
+        <input value="bot.robot_key" type="text" style="width: 100%;" name="key" id="" placeholder="Insert api from telegram">
+        <br><br>
+
+        <button type="submit" style="background-color:
+            #229ED9; color: white;
+            padding: 7px;
+            border-radius: 20px;
+            width: 200px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            border: none;
+            margin: 0 auto; display: block;">
+            Submit
+    </button>
+    </form>
+</div>
+{% endblock %}

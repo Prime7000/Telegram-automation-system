@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+
+<style>
+    .parent{
+        display: flex;
+        width: 100%;
+        height: 100%;
+        flex-wrap: wrap;
+        align-items: start;
+    }
+
+    .card{
+        width: 200px;
+        height: 250px;
+        background-color: #229ED9;
+        margin: 10px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 3px;
+    }
+
+    #img{
+        width: 100%;
+        height: 100%;
+        flex-basis: 50%;
+        flex-shrink: 0;
+        flex-grow: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 3px;
+    }
+
+    #content{
+        width: 100%;
+        height: 100%;
+        flex-basis: 50%;
+        flex-shrink: 0;
+        flex-grow: 0;
+        color: white;
+        text-align: center;
+    }
+
+    p{
+        margin: 0;
+        line-height: 1.5rem;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<h1 style="text-align: center; color: white; background-color: #229ED9; ">Dashboard</h1> 
+
+<div class="parent">
+    {% for task in tasks %}
+    <div class="card">
+    <a href="{% url 'core:delete_task' task.id %}">
+        <span style="padding: 2px;">
+            <i style="background-color: red; padding: 2px; border-radius: 50px;" class="bi bi-trash"></i>
+        </span>
+    </a>
+
+        <div id="img" >
+            {% if task.img %}
+                <img src="{{task.img.url}}" width="100px" height="100px" style="border-radius: 50px;" alt="">
+            {% else %}
+            <img src="{% static 'img/pngwing.com (17).png' %}" width="100px" height="100px"  alt="">
+            {% endif %}
+        </div>
+        <!--  -->
+        <a href="{% url 'core:edit_task' task.id %}">
+            <div id="content">
+                <p>{{task.message|truncatechars:20}}</p>
+                {% if task.repeat == True %}
+                    <p>Auto Repeat: <span style="color: green;">on</span></p>
+                {% else %}
+                    <p>Auto Repeat: <span style="color: red;">off</span></p>
+                {% endif %}
+                <p>Organization: {{task.robot.organization_name|truncatechars:20}}</p>
+
+            </div>
+        </a>
+
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
