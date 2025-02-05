@@ -18,7 +18,7 @@ def task(img,message,bot_key):
         base_url = f"https://api.telegram.org/{key}/SendPhoto"
         caption = message
         image = img
-        img = f"media/products/{image}"
+        img = f"media/{image}"
 
         parameter = {
             "chat_id": '-4684228716',
@@ -174,5 +174,6 @@ while True:
                 print('no repeat executed')
 
     prime_time.sleep(1)
+
 
 conn.close()
